@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    public GameObject[] bulletPrefab;
     private Transform target;
     private float interval = 1f;
     private float timer = 0;
@@ -29,7 +29,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
         Vector3 position = transform.position;
         Vector3 direction = (target.position - transform.position);
         direction.Normalize();
+
+
         Quaternion rotation = Quaternion.LookRotation(direction);
-        Instantiate(bulletPrefab, position, rotation);
+        int random = Random.Range(0, bulletPrefab.Length);
+        Instantiate(bulletPrefab[random], position, rotation);
+
     }
 }

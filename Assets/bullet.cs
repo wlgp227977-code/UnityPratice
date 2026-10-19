@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     public float speed = 8f;
     private Rigidbody rb;
@@ -8,14 +8,15 @@ public class bullet : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.linearVelocity= transform.forward;
+        rb.linearVelocity= transform.forward * speed;
     }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name);
         if (other.CompareTag("Player"))
         {
-           other.gameObject.SetActive(false);
+           PlayerControl playerControl = other.GetComponent<PlayerControl>();
+           playerControl.OnDie();
         }
 
         if (!other.CompareTag("Bullet"))
@@ -25,14 +26,14 @@ public class bullet : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider other)
-    {
+    // private void OnTriggerStay(Collider other)
+    // {
 
-    }
+    // }
 
-    private void OnTriggerExit(Collider other)
-    {
+    // private void OnTriggerExit(Collider other)
+    // {
 
-    }
+    // }
 
 }
